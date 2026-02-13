@@ -70,9 +70,12 @@ class ParticleSystem {
         }
       }
 
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const pColor = isLight ? '0, 100, 160' : '0, 212, 255';
+
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(0, 212, 255, ${p.opacity})`;
+      this.ctx.fillStyle = `rgba(${pColor}, ${p.opacity})`;
       this.ctx.fill();
 
       // Connections
@@ -85,7 +88,7 @@ class ParticleSystem {
           this.ctx.beginPath();
           this.ctx.moveTo(p.x, p.y);
           this.ctx.lineTo(p2.x, p2.y);
-          this.ctx.strokeStyle = `rgba(0, 212, 255, ${0.08 * (1 - dist / 120)})`;
+          this.ctx.strokeStyle = `rgba(${pColor}, ${0.08 * (1 - dist / 120)})`;
           this.ctx.lineWidth = 0.5;
           this.ctx.stroke();
         }
